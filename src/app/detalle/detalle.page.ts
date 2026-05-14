@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+//TODO-Importamos Signal en '@angular/core'
+import { Component, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent,
@@ -17,17 +18,19 @@ import { Elemento } from '../models/elemento.model';
 })
 export class DetallePage implements OnInit {
 
-  // TODO (Apartado 3 – Interpolación): Usar {{ elementoDetalle.nombre }} en el HTML
-  elementoDetalle: Elemento | null = null;
+  // TODO: Modificamos elementoDetalle: Elemento | null = null; para utilizarlo con signal
+  // Signal: empieza en null y se actualiza con .set() cuando lleguen los datos de navegación.
+  // En el HTML se lee como elementoDetalle()
+  elementoDetalle = signal<Elemento | null>(null);
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    // Recuperar el elemento pasado desde la página anterior mediante el estado de navegación
-    // Pista: history.state
     const state = history.state;
     if (state?.elementoHome) {
-      this.elementoDetalle = state.elementoHome;
+      //TODO: Actualizar el signal mediante set
+      // Actualizamos el signal con el elemento recibido por navegación
+      this.elementoDetalle.set(state.elementoHome);
     }
   }
 }

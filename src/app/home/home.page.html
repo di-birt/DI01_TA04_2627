@@ -1,13 +1,11 @@
 <!--
-  TAREA TA01 – HomePage
+  TAREA TA04 – HomePage
   Implementa los TODOs siguiendo los apartados indicados en la teoría.
 -->
 
-<!-- TODO (Apartado 1): Encabezado con ion-header, ion-toolbar e ion-title -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      <!-- TODO: Escribe aquí el nombre de tu aplicación -->
        Mi Aplicación
     </ion-title>
   </ion-toolbar>
@@ -15,38 +13,18 @@
 
 <ion-content [fullscreen]="true">
 
-  <!-- TODO (Apartado 3 – Two-way Binding):
-       Añadir un ion-item con ion-input para filtrar la lista en tiempo real.
-       - Haced uso de la variable "busqueda"
-       - Añade un placeholder descriptivo.
-       Referencia de la teoría (apartado 3 – Two-way Binding):
-         <ion-input [(ngModel)]="nombre"></ion-input>
-  -->
+  <!-- TODO Con signals no podemos usar [(ngModel)] directamente.
+       Usamos property binding [ngModel] para leer el valor del signal (busqueda())
+       y event binding (ngModelChange) para actualizar el signal con .set() -->
   <ion-item>
-    <ion-input [(ngModel)]="busqueda" placeholder="Buscar elemento..."></ion-input>
+    <!--  <ion-input [(ngModel)]="busqueda" placeholder="Buscar elemento..."></ion-input> -->
+    <ion-input [ngModel]="busqueda()" (ngModelChange)="busqueda.set($event)" placeholder="Buscar elemento..."></ion-input>
   </ion-item>
 
-  <!-- TODO (Apartado 1 + 2 + 3):
-       Lista de elementos.
-       - Usa <ion-list> como contenedor.
-       - Itera sobre elementosFiltrados con @for (apartado 4 de la teoría, ya disponible).
-       - Cada fila: <ion-item button="true"...> y acceder a verDetalle en cada click. Dentro del ion-item tendremos <ion-label>.
-         · <h2> con el nombre del elemento.
-         · <p> con la descripción.
-       - Muestra al menos 5 elementos (defínelos en home.page.ts).
-
-       Referencia de la teoría (apartado 1 – ion-list, ion-item, ion-label):
-         <ion-list>
-           <ion-item>
-             <ion-label>
-               <h2>Nombre</h2>
-               <p>Descripción</p>
-             </ion-label>
-           </ion-item>
-         </ion-list>
-  -->
   <ion-list>
-    @for (elemento of elementosFiltrados; track elemento.id) {
+    <!-- TODO - Los computed se llaman como funciones: elementosFiltrados() -->
+     <!-- @for (elemento of elementosFiltrados; track elemento.id) { -->
+    @for (elemento of elementosFiltrados(); track elemento.id) {
       <ion-item button="true" (click)="verDetalle(elemento)">
         <ion-label>
           <h2>{{ elemento.nombre }}</h2>
@@ -56,21 +34,14 @@
     }
   </ion-list>
 
-  <!-- TODO (Apartado 1 + 3 – Event Binding + Property Binding):
-       Añadir un <ion-button> que:
-       · Al pulsarlo llame a mostrarToast()
-       · Esté deshabilitado si no hay elementos en la lista (usa la variable "hayElementos" para esto).
-
-       Referencia de la teoría (apartado 3 – Event Binding y Property Binding):
-         <ion-button [disabled]="!formValido" (click)="guardar()">Guardar</ion-button>
-  -->
-  <ion-button expand="block" [disabled]="!hayElementos" (click)="mostrarToast()">
+  <!-- TODO - hayElementos también es computed: se llama como función hayElementos() -->
+  <!-- <ion-button expand="block" [disabled]="!hayElementos" (click)="mostrarToast()"> -->
+  <ion-button expand="block" [disabled]="!hayElementos()" (click)="mostrarToast()">
     Mostrar mensaje
   </ion-button>
 
 </ion-content>
 
-<!-- TODO (Apartado 1): Añadir ion-footer con ion-toolbar e ion-title informativo -->
 <ion-footer>
   <ion-toolbar>
     <ion-title>Footer Tarea TA01 - Angular + Ionic</ion-title>

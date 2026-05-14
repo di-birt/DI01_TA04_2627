@@ -1,60 +1,34 @@
 <!--
-  TAREA TA01 – DetallePage
+  TAREA TA04 – DetallePage
   Implementa los TODOs siguiendo los apartados indicados en la teoría.
 -->
 
-<!-- TODO (Apartado 1 + 2): Encabezado con ion-back-button y título del elemento seleccionado -->
 <ion-header [translucent]="true">
   <ion-toolbar>
-
-    <!-- TODO (Apartado 2):
-         Añadir <ion-buttons slot="start"> con <ion-back-button> para volver a la página de inicio.
-          - Usa el atributo defaultHref="/home" para asegurar que el botón funcione incluso si se accede directamente a esta página.
-          Estructura de referencia (teoría, apartado 2 – ion-back-button)
-    -->
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-
-     <!-- TODO (Apartado 3 – Interpolación):
-         Mostrar el nombre del elemento en el título usando {{ elementoDetalle?.nombre }}
-         En vez de <ion-title>Detalle</ion-title>
-    -->
-    <ion-title>{{ elementoDetalle?.nombre }}</ion-title>
+     <!-- TODO: Modificar <ion-title>{{ elementoDetalle?.nombre }}</ion-title> -->
+    <!-- Con signal, leemos el valor llamándolo como función: elementoDetalle() -->
+    <ion-title>{{ elementoDetalle()?.nombre }}</ion-title>
 
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
-  <!-- TODO (Apartado 1 + 3 – Interpolación):
-       Mostrar los datos del elemento seleccionado.
-
-       Estructura sugerida:
-       <ion-list>
-         <ion-item>
-           <ion-label>
-             <h2>{{ elementoDetalle.nombre }}</h2>
-             <p>{{ elementoDetalle.descripcion }}</p>
-           </ion-label>
-         </ion-item>
-         <ion-item>
-           <ion-label>Categoría: {{ elementoDetalle.categoria }}</ion-label>
-         </ion-item>
-       </ion-list>
-
-       Si no hay elemento seleccionado, muestra un mensaje informativo.
-  -->
-  @if (elementoDetalle) {
+  <!-- TODO: Modificar elementoDetalle por elementoDetalle()-->
+  <!-- @if evalúa el signal como función; dentro del bloque, elementoDetalle() ya tiene valor -->
+  @if (elementoDetalle()) {
     <ion-list>
       <ion-item>
         <ion-label>
-          <h2>{{ elementoDetalle.nombre }}</h2>
-          <p>{{ elementoDetalle.descripcion }}</p>
+          <h2>{{ elementoDetalle()!.nombre }}</h2>
+          <p>{{ elementoDetalle()!.descripcion }}</p>
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>Categoría: {{ elementoDetalle.categoria }}</ion-label>
+        <ion-label>Categoría: {{ elementoDetalle()!.categoria }}</ion-label>
       </ion-item>
     </ion-list>
   } @else {
