@@ -18,6 +18,7 @@
        y event binding (ngModelChange) para actualizar el signal con .set() -->
   <ion-item>
     <!--  <ion-input [(ngModel)]="busqueda" placeholder="Buscar elemento..."></ion-input> -->
+    <!-- El value de un $event puede ser string | null | undefined y debemos controlarlos-->
     <ion-input [value]="busqueda()" (ionInput)="busqueda.set($event.detail.value ?? '')" placeholder="Buscar elemento..."></ion-input>
   </ion-item>
 

@@ -23,7 +23,7 @@ export class DetallePage implements OnInit {
   // En el HTML se lee como elementoDetalle()
   elementoDetalle = signal<Elemento | null>(null);
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit(): void {
     const state = history.state;
