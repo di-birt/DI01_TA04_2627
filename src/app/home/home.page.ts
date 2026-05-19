@@ -6,7 +6,6 @@ import {
   IonList, IonItem, IonLabel, IonButton, IonInput,
   ToastController
 } from '@ionic/angular/standalone';
-import { FormsModule } from '@angular/forms';
 import { Elemento } from '../models/elemento.model';
 
 @Component({
@@ -15,8 +14,7 @@ import { Elemento } from '../models/elemento.model';
   styleUrls: ['home.page.scss'],
   imports: [
     IonHeader, IonToolbar, IonTitle, IonContent, IonFooter,
-    IonList, IonItem, IonLabel, IonButton, IonInput,
-    FormsModule
+    IonList, IonItem, IonLabel, IonButton, IonInput
   ],
 })
 export class HomePage {
